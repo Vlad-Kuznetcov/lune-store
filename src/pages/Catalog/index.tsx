@@ -48,7 +48,7 @@ const CatalogPage = () => {
 
           <CategoryFilter
             selectedCategory={selectedCategory}
-            onSelectCategory={(category) => {
+            onSelectCategory={(category: CategoryFilterType) => {
               if (category === "all") {
                 setSearchParams({});
                 return;
