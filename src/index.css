@@ -2,24 +2,13 @@
 
 @import "tailwindcss";
 
-:root {
-  /* Backgrounds */
-  --color-background: #ffffff;
-  --color-surface: #fafafa;
-
-  /* Text */
-  --color-text: #18181b;
-  --color-text-secondary: #71717a;
-
-  /* Borders */
-  --color-border: #e4e4e7;
-
-  /* Brand */
-  --color-accent: #18181b;
-}
-
 body {
   font-family: "Inter", sans-serif;
-  background: var(--color-background);
-  color: var(--color-text);
+  background-color: #fcfaf7;
+  color: #18181b;
+}
+
+::selection {
+  background: #d4d4d8;
+  color: #18181b;
 }
