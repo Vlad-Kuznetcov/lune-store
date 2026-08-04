@@ -9,33 +9,14 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link
-      to="#"
-      className="
-    group
-    block
-    overflow-hidden
-    rounded-3xl
-    border
-    border-zinc-200
-    bg-white
-    transition-all
-    duration-300
-    hover:-translate-y-1
-    hover:border-zinc-300
-  "
+      to={`/catalog/${product.id}`}
+      className="group block overflow-hidden rounded-3xl border border-zinc-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300"
     >
       <div className="relative overflow-hidden bg-zinc-50">
         <img
           src={product.image}
           alt={product.name}
-          className="
-            aspect-square
-            w-full
-            object-cover
-            transition-transform
-            duration-500
-            group-hover:scale-105
-          "
+          className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -46,25 +27,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {product.price.toLocaleString("uk-UA")} ₴
         </p>
 
-        <div
-          className="
-    flex
-    items-center
-    gap-2
-    text-sm
-    font-medium
-    text-zinc-700
-  "
-        >
+        <div className="flex items-center gap-2 text-sm font-medium text-zinc-700">
           <span>Переглянути</span>
 
           <ArrowRight
             size={18}
-            className="
-      transition-transform
-      duration-300
-      group-hover:translate-x-1
-    "
+            className="transition-transform duration-300 group-hover:translate-x-1"
           />
         </div>
       </div>

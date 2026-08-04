@@ -1,7 +1,7 @@
 import Container from "../ui/Container";
-import ProductCard from "../produst/ProductCard";
+import ProductCard from "../product/ProductCard";
 
-import { products } from "../data/products";
+import { products } from "../../data/products";
 import SectionTitle from "../ui/SectionTitle";
 
 const FeaturedProductsSection = () => {

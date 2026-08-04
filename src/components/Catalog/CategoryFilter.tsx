@@ -1,8 +1,9 @@
-import { categories } from "../../components/categories";
+import { categories } from "../../constants/categories";
+import type { CategoryFilter as CategoryFilterType } from "../../types/category";
 
 interface CategoryFilterProps {
-  selectedCategory: string;
-  onSelectCategory: (category: string) => void;
+  selectedCategory: CategoryFilterType;
+  onSelectCategory: (category: CategoryFilterType) => void;
 }
 
 const CategoryFilter = ({
@@ -11,50 +12,35 @@ const CategoryFilter = ({
 }: CategoryFilterProps) => {
   return (
     <div className="mb-12 flex flex-wrap justify-center gap-3">
-      {/* Все */}
-
       <button
         onClick={() => onSelectCategory("all")}
-        className={`
-          rounded-full
-          px-5
-          py-2.5
-          text-sm
-          transition-all
-          duration-300
-
-          ${
-            selectedCategory === "all"
-              ? "bg-zinc-900 text-white"
-              : "border border-zinc-300 hover:border-zinc-900"
-          }
-        `}
+        className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm transition-all duration-300 ${
+          selectedCategory === "all"
+            ? "bg-zinc-900 text-white"
+            : "border border-zinc-300 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
+        } `}
       >
         Всі
       </button>
 
-      {categories.map((category) => (
-        <button
-          key={category.id}
-          onClick={() => onSelectCategory(category.id)}
-          className={`
-            rounded-full
-            px-5
-            py-2.5
-            text-sm
-            transition-all
-            duration-300
+      {categories.map((category) => {
+        const Icon = category.icon;
 
-            ${
+        return (
+          <button
+            key={category.id}
+            onClick={() => onSelectCategory(category.id)}
+            className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm transition-all duration-300 ${
               selectedCategory === category.id
                 ? "bg-zinc-900 text-white"
-                : "border border-zinc-300 hover:border-zinc-900"
-            }
-          `}
-        >
-          {category.title}
-        </button>
-      ))}
+                : "border border-zinc-300 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white"
+            } `}
+          >
+            <Icon size={18} />
+            {category.title}
+          </button>
+        );
+      })}
     </div>
   );
 };
