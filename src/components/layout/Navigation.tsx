@@ -2,16 +2,16 @@ import { NavLink } from "react-router-dom";
 
 const links = [
   {
-    title: "Головна",
-    href: "/",
-  },
-  {
     title: "Каталог",
     href: "/catalog",
   },
   {
     title: "Про нас",
     href: "/about",
+  },
+  {
+    title: "Контакти",
+    href: "/contacts",
   },
 ];
 
@@ -24,34 +24,11 @@ const Navigation = () => {
             <NavLink
               to={link.href}
               className={({ isActive }) =>
-                `
-                relative
-                text-sm
-                font-medium
-                tracking-wide
-                transition-colors
-                duration-300
-
-                after:absolute
-                after:left-1/2
-                after:-bottom-1
-                after:h-[1px]
-                after:w-3/4
-                after:-translate-x-1/2
-                after:origin-center
-                after:scale-x-0
-                after:bg-black
-                after:transition-transform
-                after:duration-300
-
-                hover:after:scale-x-100
-
-                ${
+                `relative text-sm font-medium tracking-wide transition-colors duration-300 after:absolute after:-bottom-1 after:left-1/2 after:h-[1px] after:w-3/4 after:origin-center after:-translate-x-1/2 after:scale-x-0 after:bg-black after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                   isActive
                     ? "text-black after:scale-x-100"
                     : "text-zinc-600 hover:text-black"
-                }
-                `
+                } `
               }
             >
               {link.title}

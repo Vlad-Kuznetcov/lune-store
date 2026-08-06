@@ -1,7 +1,16 @@
 import { FaInstagram } from "react-icons/fa6";
 import { FaTelegramPlane } from "react-icons/fa";
 
+import { ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import { useCart } from "../context/CartContext";
+
 const HeaderActions = () => {
+  const { cart } = useCart();
+
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="flex items-center gap-5">
       <a
@@ -19,6 +28,23 @@ const HeaderActions = () => {
       >
         <FaTelegramPlane size={20} />
       </a>
+
+      <Link
+        to="/cart"
+        aria-label="Кошик"
+        className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-md"
+      >
+        <ShoppingBag
+          size={20}
+          className="text-zinc-700 transition-transform duration-300 group-hover:scale-110"
+        />
+
+        {totalItems > 0 && (
+          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[11px] font-medium text-white">
+            {totalItems}
+          </span>
+        )}
+      </Link>
     </div>
   );
 };
