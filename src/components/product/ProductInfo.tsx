@@ -18,15 +18,17 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   return (
     <div className="flex flex-col">
       <p className="text-sm tracking-[0.3em] text-zinc-500 uppercase">LUNÉ</p>
-      <h1 className="mt-4 text-4xl leading-tight font-light">{product.name}</h1>
+      <h1 className="mt-3 text-3xl leading-tight font-light sm:mt-4 sm:text-4xl">
+        {product.name}
+      </h1>
       <p className="mt-3 text-zinc-500">Артикул: {product.article}</p>
-      <div className="mt-8 flex items-end gap-4">
+      <div className="mt-6 flex items-end gap-3 sm:mt-8 sm:gap-4">
         <div className="space-y-1">
           <p className="text-lg text-zinc-400 line-through">
             {oldPrice.toLocaleString("uk-UA")} ₴
           </p>
 
-          <p className="text-4xl font-semibold tracking-wide">
+          <p className="text-3xl font-semibold tracking-wide sm:text-4xl">
             {product.price.toLocaleString("uk-UA")} ₴
           </p>
 
@@ -67,7 +69,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             setAdded(false);
           }, 1200);
         }}
-        className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-zinc-900 py-4 text-lg font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-lg active:scale-[0.98]"
+        className="mt-10 flex w-full items-center justify-center gap-3 rounded-full bg-zinc-900 py-3.5 text-base font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-lg active:scale-[0.98] sm:py-4 sm:text-lg"
       >
         <>
           {added ? (

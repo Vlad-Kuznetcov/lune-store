@@ -11,6 +11,9 @@ import BackToCatalog from "../../components/product/BackToCatalog";
 import ProductDescription from "../../components/product/ProductDescription";
 import ProductDetails from "../../components/product/ProductDetails";
 
+import ProductGrid from "../../components/catalog/ProductGrid";
+import SectionTitle from "../../components/ui/SectionTitle";
+
 const ProductPage = () => {
   const { id } = useParams();
 
@@ -28,18 +31,37 @@ const ProductPage = () => {
     );
   }
 
+  const relatedProducts = products
+    .filter((item) => item.id !== product.id)
+    .slice(0, 4);
+
   return (
     <Section>
       <Container>
         <BackToCatalog />
+
         <div className="grid gap-16 lg:grid-cols-2">
           <ProductGallery image={product.image} name={product.name} />
 
           <ProductInfo product={product} />
         </div>
+
         <ProductDescription description={product.description} />
 
         <ProductDetails details={product.details} />
+
+        {relatedProducts.length > 0 && (
+          <div className="mt-24">
+            <SectionTitle
+              overline="СХОЖІ ПРИКРАСИ"
+              title="Доповніть свій образ"
+            />
+
+            <div className="mt-10">
+              <ProductGrid products={relatedProducts} />
+            </div>
+          </div>
+        )}
       </Container>
     </Section>
   );

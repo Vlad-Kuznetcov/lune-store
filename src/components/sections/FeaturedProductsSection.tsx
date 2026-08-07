@@ -6,11 +6,11 @@ import SectionTitle from "../ui/SectionTitle";
 
 const FeaturedProductsSection = () => {
   return (
-    <section className="py-24">
+    <section className="py-16 sm:py-20 lg:py-24">
       <Container>
         <SectionTitle overline="Колекція" title="Популярні прикраси" />
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-5 lg:mt-16 lg:grid-cols-5 lg:gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

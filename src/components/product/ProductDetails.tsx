@@ -8,18 +8,22 @@ const ProductDetails = ({ details }: ProductDetailsProps) => {
   if (!details || details.length === 0) return null;
 
   return (
-    <section className="mt-16 border-t border-zinc-200 pt-12">
-      <h2 className="text-2xl font-light">Детальна інформація</h2>
+    <section className="mt-14 border-t border-zinc-200 pt-8 sm:mt-16 sm:pt-12">
+      <h2 className="text-xl font-light sm:text-2xl">Детальна інформація</h2>
 
       <div className="mt-8 space-y-4">
         {details.map((detail) => (
           <div
             key={detail.label}
-            className="flex justify-between border-b border-zinc-100 pb-4"
+            className="flex flex-col gap-1 border-b border-zinc-100 pb-4 sm:flex-row sm:items-center sm:justify-between"
           >
-            <span className="text-zinc-500">{detail.label}</span>
+            <span className="text-sm text-zinc-500 sm:text-base">
+              {detail.label}
+            </span>
 
-            <span className="font-medium text-zinc-900">{detail.value}</span>
+            <span className="text-sm font-medium text-zinc-900 sm:text-base">
+              {detail.value}
+            </span>
           </div>
         ))}
       </div>

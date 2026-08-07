@@ -1,21 +1,12 @@
 const AnnouncementBar = () => {
-  const text =
-    "✨ Святкуємо відкриття LUNÉ • -15% на весь асортимент • Срібло 925 проби • Швидка доставка по Україні •";
-
   return (
-    <div className="overflow-hidden border-y border-white/10 bg-zinc-900 py-2.5">
-      <div className="flex whitespace-nowrap">
-        <div className="animate-marquee flex">
-          <span className="mx-8 text-sm font-normal tracking-wide text-white/90">
-            {text.repeat(3)}
-          </span>
-        </div>
-
-        <div className="animate-marquee flex" aria-hidden="true">
-          <span className="mx-8 text-sm font-normal tracking-wide text-white/90">
-            {text.repeat(3)}
-          </span>
-        </div>
+    <div className="border-y border-zinc-200 bg-white">
+      <div className="mx-auto flex min-h-11 items-center justify-center px-4">
+        <p className="text-center text-xs font-medium tracking-wide text-zinc-600 sm:text-sm">
+          ✨ Знижка <span className="font-semibold text-black">-15%</span> на
+          честь відкриття • Безкоштовна доставка від{" "}
+          <span className="font-semibold text-black">2000 ₴</span>
+        </p>
       </div>
     </div>
   );

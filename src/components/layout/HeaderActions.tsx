@@ -6,31 +6,43 @@ import { Link } from "react-router-dom";
 
 import { useCart } from "../context/CartContext";
 
-const HeaderActions = () => {
+interface HeaderActionsProps {
+  mobile?: boolean;
+  onNavigate?: () => void;
+}
+
+const HeaderActions = ({ mobile = false, onNavigate }: HeaderActionsProps) => {
   const { cart } = useCart();
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="flex items-center gap-5">
-      <a
-        href="#"
-        className="transition hover:text-zinc-500"
-        aria-label="Instagram"
-      >
-        <FaInstagram size={20} />
-      </a>
+    <div
+      className={
+        mobile ? "flex items-center justify-between" : "flex items-center gap-4"
+      }
+    >
+      <div className="flex items-center gap-5">
+        <a
+          href="#"
+          className="transition hover:text-zinc-500"
+          aria-label="Instagram"
+        >
+          <FaInstagram size={20} />
+        </a>
 
-      <a
-        href="#"
-        className="transition hover:text-zinc-500"
-        aria-label="Telegram"
-      >
-        <FaTelegramPlane size={20} />
-      </a>
+        <a
+          href="#"
+          className="transition hover:text-zinc-500"
+          aria-label="Telegram"
+        >
+          <FaTelegramPlane size={20} />
+        </a>
+      </div>
 
       <Link
         to="/cart"
+        onClick={onNavigate}
         aria-label="Кошик"
         className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-md"
       >
