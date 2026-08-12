@@ -5,6 +5,7 @@ import Container from "../ui/Container";
 import Logo from "../ui/Logo";
 import Navigation from "./Navigation";
 import HeaderActions from "./HeaderActions";
+import CartButton from "./CartButton";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,38 +13,65 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/90 backdrop-blur-md">
       <Container>
-        <div className="flex h-20 items-center justify-between">
+        {/* Mobile */}
+        <div className="grid h-20 grid-cols-3 items-center md:hidden">
+          <div className="justify-self-start">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="rounded-lg p-2 transition hover:bg-zinc-100"
+              aria-label="Меню"
+            >
+              {isOpen ? <X size={25} /> : <Menu size={25} />}
+            </button>
+          </div>
+
+          <div className="justify-self-center">
+            <Logo />
+          </div>
+
+          <div className="justify-self-end">
+            <CartButton />
+          </div>
+        </div>
+
+        {/* Desktop */}
+        <div className="hidden h-20 items-center justify-between md:flex">
           <Logo />
 
-          <div className="hidden md:block">
-            <Navigation />
-          </div>
+          <Navigation />
 
-          <div className="hidden md:block">
+          <div className="flex items-center gap-5">
             <HeaderActions />
+            <CartButton />
           </div>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="rounded-lg p-2 transition hover:bg-zinc-100 md:hidden"
-            aria-label="Меню"
-          >
-            {isOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
         </div>
       </Container>
 
-      {isOpen && (
-        <div className="border-t border-zinc-200 bg-white md:hidden">
-          <Container>
-            <Navigation mobile onNavigate={() => setIsOpen(false)} />
+      <div
+        className={`grid transition-[grid-template-rows] duration-300 ease-out md:hidden ${
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-zinc-200 bg-white">
+            <Container>
+              <div
+                className={`transform transition-all duration-300 ${
+                  isOpen
+                    ? "translate-y-0 opacity-100"
+                    : "-translate-y-3 opacity-0"
+                }`}
+              >
+                <Navigation mobile onNavigate={() => setIsOpen(false)} />
 
-            <div className="mt-2 border-t border-zinc-100 pt-6 pb-6">
-              <HeaderActions mobile onNavigate={() => setIsOpen(false)} />
-            </div>
-          </Container>
+                <div className="border-t border-zinc-100 pt-6 pb-6">
+                  <HeaderActions />
+                </div>
+              </div>
+            </Container>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
