@@ -27,17 +27,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
         />
       </div>
 
-      <div className="flex h-full flex-col p-4 sm:p-5 lg:p-6">
-        <h3 className="min-h-[84px] text-base leading-7 font-medium sm:min-h-[64px] sm:text-lg">
+      <div className="flex h-full flex-col p-5 sm:p-5 lg:p-6">
+        <h3 className="text-lg leading-7 font-medium sm:text-lg lg:text-lg">
           {product.name}
         </h3>
 
         <div className="space-y-1">
-          <p className="text-sm text-zinc-400 line-through">
+          <p className="text-base text-zinc-400 line-through">
             {oldPrice.toLocaleString("uk-UA")} ₴
           </p>
 
-          <p className="text-xl font-semibold tracking-wide text-zinc-900 sm:text-2xl">
+          <p className="text-2xl font-semibold tracking-wide text-zinc-900 sm:text-2xl">
             {product.price.toLocaleString("uk-UA")} ₴
           </p>
         </div>

@@ -23,8 +23,10 @@ const ProductPage = () => {
     return (
       <Section>
         <Container>
-          <div className="py-24 text-center">
-            <h1 className="text-3xl font-light">Товар не знайдено</h1>
+          <div className="py-20 text-center sm:py-24">
+            <h1 className="text-2xl font-light sm:text-3xl">
+              Товар не знайдено
+            </h1>
           </div>
         </Container>
       </Section>
@@ -40,27 +42,31 @@ const ProductPage = () => {
       <Container>
         <BackToCatalog />
 
-        <div className="grid gap-16 lg:grid-cols-2">
+        {/* Основная информация */}
+        <div className="mt-6 grid gap-10 sm:gap-12 lg:mt-8 lg:grid-cols-2 lg:gap-16">
           <ProductGallery image={product.image} name={product.name} />
 
           <ProductInfo product={product} />
         </div>
 
+        {/* Описание */}
         <ProductDescription description={product.description} />
 
+        {/* Детальная информация */}
         <ProductDetails details={product.details} />
 
+        {/* Похожие товары */}
         {relatedProducts.length > 0 && (
-          <div className="mt-24">
+          <section className="mt-16 border-t border-zinc-200 pt-12 sm:mt-20 sm:pt-16 lg:mt-24">
             <SectionTitle
               overline="СХОЖІ ПРИКРАСИ"
               title="Доповніть свій образ"
             />
 
-            <div className="mt-10">
+            <div className="mt-8 sm:mt-10">
               <ProductGrid products={relatedProducts} />
             </div>
-          </div>
+          </section>
         )}
       </Container>
     </Section>

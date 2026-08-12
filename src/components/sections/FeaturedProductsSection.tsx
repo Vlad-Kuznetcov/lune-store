@@ -10,7 +10,7 @@ const FeaturedProductsSection = () => {
       <Container>
         <SectionTitle overline="Колекція" title="Популярні прикраси" />
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-5 lg:mt-16 lg:grid-cols-5 lg:gap-6">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:mt-16 lg:grid-cols-4 lg:gap-8">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
