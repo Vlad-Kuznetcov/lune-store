@@ -24,7 +24,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const { addToCart } = useCart();
 
   const [added, setAdded] = useState(false);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(
+    undefined,
+  );
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   const oldPrice = Math.round(product.price / (1 - STORE_DISCOUNT / 100));
