@@ -1,11 +1,10 @@
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { useCart } from "../../components/context/CartContext";
-
 import Container from "../../components/ui/Container";
 import Section from "../../components/ui/Section";
 import SectionTitle from "../../components/ui/SectionTitle";
-import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const { cart, increaseQuantity, decreaseQuantity, removeFromCart } =
@@ -13,93 +12,144 @@ const CartPage = () => {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  const handleTelegramOrder = () => {
+    const items = cart
+      .map(
+        (item) =>
+          `• ${item.name}${item.size ? ` — розмір ${item.size}` : ""} — ${item.price.toLocaleString("uk-UA")} грн × ${item.quantity}`,
+      )
+      .join("\n");
+
+    const message = `Добрий день! Хочу оформити замовлення:
+
+${items}
+
+Разом: ${total.toLocaleString("uk-UA")} грн`;
+
+    const telegramUsername = "lune_manager_ua";
+
+    const url = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+  };
+
   if (cart.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-stone-100">
-          <ShoppingBag size={34} className="text-zinc-700" />
-        </div>
+      <Section>
+        <Container>
+          <div className="flex min-h-[50vh] flex-col items-center justify-center py-16 text-center">
+            <ShoppingBag size={40} className="text-zinc-400" />
 
-        <h2 className="mt-8 text-3xl font-medium">Ваш кошик порожній</h2>
+            <h2 className="mt-8 text-2xl font-medium sm:text-3xl">
+              Ваш кошик порожній
+            </h2>
 
-        <p className="mt-4 max-w-md leading-7 text-zinc-500">
-          Перейдіть до каталогу, щоб знайти прикраси, які ідеально доповнять ваш
-          образ.
-        </p>
+            <p className="mt-4 max-w-md px-4 leading-7 text-zinc-500">
+              Перейдіть до каталогу, щоб знайти прикраси, які ідеально доповнять
+              ваш образ.
+            </p>
 
-        <Link
-          to="/catalog"
-          className="mt-10 rounded-full bg-zinc-900 px-8 py-4 text-white transition hover:bg-zinc-800 hover:shadow-lg"
-        >
-          До каталогу
-        </Link>
-      </div>
+            <Link
+              to="/catalog"
+              className="mt-10 rounded-full bg-zinc-900 px-8 py-4 text-white transition hover:bg-zinc-800 hover:shadow-lg"
+            >
+              До каталогу
+            </Link>
+          </div>
+        </Container>
+      </Section>
     );
   }
 
   return (
     <Section>
       <Container>
-        <SectionTitle overline="LUNÉ" title="Кошик" />
+        <SectionTitle overline="Кошик" title="Ваші прикраси" />
 
-        <div className="mt-16 space-y-6">
+        <div className="mx-auto mt-10 max-w-5xl space-y-4 sm:mt-12 sm:space-y-6">
           {cart.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-6 rounded-3xl border border-stone-200 bg-white p-6"
+              className="rounded-3xl border border-stone-200 bg-white p-5 sm:flex sm:items-center sm:gap-6 sm:p-6"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="h-28 w-28 rounded-2xl bg-stone-100 object-cover"
-              />
+              {/* Фото */}
+              <div className="flex h-32 w-full shrink-0 items-center justify-center rounded-2xl sm:h-28 sm:w-28">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full w-full object-contain"
+                />
+              </div>
 
-              <div className="flex-1">
-                <h2 className="text-xl font-medium">{item.name}</h2>
+              {/* Інформація */}
+              <div className="mt-5 min-w-0 flex-1 sm:mt-0">
+                <h2 className="text-xl leading-7 font-medium">{item.name}</h2>
 
-                <p className="mt-2 text-sm text-stone-500">
+                <p className="mt-1.5 text-sm text-stone-500">
                   Артикул: {item.article}
                 </p>
 
-                <p className="mt-4 text-xl font-semibold">{item.price} грн</p>
+                {item.size && (
+                  <p className="mt-1 text-sm text-stone-500">
+                    Розмір: {item.size}
+                  </p>
+                )}
+
+                <p className="mt-3 text-xl font-semibold">
+                  {item.price.toLocaleString("uk-UA")} грн
+                </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => decreaseQuantity(item.id)}
-                  className="rounded-full border p-2 hover:bg-stone-100"
-                >
-                  <Minus size={16} />
-                </button>
+              {/* Кількість + видалення */}
+              <div className="mt-6 flex items-center justify-between sm:mt-0 sm:justify-start">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => decreaseQuantity(item.id, item.size)}
+                    aria-label="Зменшити кількість"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 transition hover:bg-stone-100"
+                  >
+                    <Minus size={16} />
+                  </button>
 
-                <span className="w-8 text-center">{item.quantity}</span>
+                  <span className="w-6 text-center font-medium">
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    onClick={() => increaseQuantity(item.id, item.size)}
+                    aria-label="Збільшити кількість"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 transition hover:bg-stone-100"
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
 
                 <button
-                  onClick={() => increaseQuantity(item.id)}
-                  className="rounded-full border p-2 hover:bg-stone-100"
+                  onClick={() => removeFromCart(item.id, item.size)}
+                  aria-label={`Видалити ${item.name}`}
+                  className="rounded-full p-2 text-stone-400 transition hover:bg-stone-100 hover:text-red-500 sm:ml-6"
                 >
-                  <Plus size={16} />
+                  <Trash2 size={21} />
                 </button>
               </div>
-
-              <button
-                onClick={() => removeFromCart(item.id)}
-                className="text-stone-400 transition hover:text-red-500"
-              >
-                <Trash2 size={22} />
-              </button>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 rounded-3xl border border-stone-200 bg-white p-8">
-          <div className="flex items-center justify-between text-2xl">
+        {/* Підсумок */}
+        <div className="mx-auto mt-8 max-w-5xl rounded-3xl border border-stone-200 bg-white p-5 sm:mt-10 sm:p-8">
+          <div className="flex items-center justify-between gap-4 text-xl sm:text-2xl">
             <span>Разом</span>
 
-            <span className="font-semibold">{total} грн</span>
+            <span className="text-right font-semibold">
+              {total.toLocaleString("uk-UA")} грн
+            </span>
           </div>
 
-          <button className="mt-8 w-full rounded-full bg-zinc-900 py-4 text-lg font-medium text-white transition hover:bg-zinc-800">
+          <button
+            onClick={handleTelegramOrder}
+            className="mt-6 w-full rounded-full bg-zinc-900 py-4 text-base font-medium text-white transition hover:bg-zinc-800 hover:shadow-lg sm:mt-8 sm:text-lg"
+          >
             Оформити через Telegram
           </button>
         </div>

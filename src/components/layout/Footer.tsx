@@ -6,13 +6,12 @@ import Container from "../ui/Container";
 
 const Footer = () => {
   return (
-    <footer className="mt-32 border-t border-zinc-200">
+    <footer className="border-t border-zinc-200 bg-white">
       <Container>
         {/* Logo */}
-
-        <div className="py-20 text-center">
+        <div className="py-14 text-center sm:py-16 md:py-20">
           <h2
-            className="text-7xl tracking-[0.25em]"
+            className="text-5xl tracking-[0.25em] sm:text-6xl md:text-7xl"
             style={{
               fontFamily: "Cormorant Garamond",
             }}
@@ -20,14 +19,13 @@ const Footer = () => {
             LUNÉ
           </h2>
 
-          <p className="mx-auto mt-6 max-w-md leading-7 text-zinc-500">
+          <p className="mx-auto mt-5 max-w-md px-4 text-sm leading-6 text-zinc-500 sm:text-base sm:leading-7">
             Срібні прикраси, що підкреслюють індивідуальність та стиль.
           </p>
         </div>
 
         {/* Columns */}
-
-        <div className="grid gap-12 border-y border-zinc-200 py-16 md:grid-cols-3">
+        <div className="grid gap-10 border-y border-zinc-200 py-12 sm:gap-12 sm:py-14 md:grid-cols-3 md:py-16">
           <FooterColumn title="Навігація">
             <FooterLink to="/">Головна</FooterLink>
             <FooterLink to="/catalog">Каталог</FooterLink>
@@ -59,8 +57,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-
-        <div className="flex flex-col items-center justify-between gap-4 py-8 text-sm text-zinc-500 md:flex-row">
+        <div className="flex flex-col items-center gap-3 py-6 text-center text-xs text-zinc-500 sm:py-8 sm:text-sm md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} LUNÉ. Всі права захищені.</p>
 
           <p>Designed with ♡</p>
@@ -77,10 +74,12 @@ interface FooterColumnProps {
 
 function FooterColumn({ title, children }: FooterColumnProps) {
   return (
-    <div className="text-center">
-      <h3 className="mb-8 text-lg font-medium">{title}</h3>
+    <div className="flex flex-col items-center">
+      <h3 className="text-sm font-medium tracking-wide text-zinc-900">
+        {title}
+      </h3>
 
-      <div className="flex flex-col items-center gap-5">{children}</div>
+      <div className="mt-5 flex flex-col items-center gap-4">{children}</div>
     </div>
   );
 }
@@ -94,7 +93,7 @@ function FooterLink({ to, children }: FooterLinkProps) {
   return (
     <Link
       to={to}
-      className="group inline-flex items-center gap-2 text-zinc-600 transition-colors duration-300 hover:text-black"
+      className="group flex items-center gap-1.5 py-1 text-sm text-zinc-500 transition-colors duration-300 hover:text-zinc-900 sm:text-base"
     >
       <span>{children}</span>
 
@@ -116,9 +115,7 @@ function SocialLink({ href, icon, children }: SocialLinkProps) {
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noreferrer"
-      className="group inline-flex items-center gap-3 text-zinc-600 transition-colors duration-300 hover:text-black"
+      className="flex items-center gap-3 py-1 text-sm text-zinc-500 transition-colors duration-300 hover:text-zinc-900 sm:text-base"
     >
       {icon}
 

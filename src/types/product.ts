@@ -24,4 +24,5 @@ export interface Product {
 
   isNew?: boolean;
   isPopular?: boolean;
+  sizes?: string[];
 }
