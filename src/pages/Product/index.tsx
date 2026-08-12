@@ -58,10 +58,7 @@ const ProductPage = () => {
         {/* Похожие товары */}
         {relatedProducts.length > 0 && (
           <section className="mt-16 border-t border-zinc-200 pt-12 sm:mt-20 sm:pt-16 lg:mt-24">
-            <SectionTitle
-              overline="СХОЖІ ПРИКРАСИ"
-              title="Доповніть свій образ"
-            />
+            <SectionTitle overline="МОЖЕ СПОДОБАТИСЯ" title="" />
 
             <div className="mt-8 sm:mt-10">
               <ProductGrid products={relatedProducts} />

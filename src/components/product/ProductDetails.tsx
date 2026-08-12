@@ -8,20 +8,20 @@ const ProductDetails = ({ details }: ProductDetailsProps) => {
   if (!details || details.length === 0) return null;
 
   return (
-    <section className="mt-14 border-t border-zinc-200 pt-8 sm:mt-16 sm:pt-12">
-      <h2 className="text-xl font-light sm:text-2xl">Детальна інформація</h2>
+    <section className="mt-12 border-t border-zinc-200 pt-10 sm:mt-16 sm:pt-12">
+      <p className="text-xs tracking-[0.3em] text-zinc-500 uppercase">
+        Характеристики
+      </p>
 
-      <div className="mt-8 space-y-4">
+      <div className="mt-7 divide-y divide-zinc-100">
         {details.map((detail) => (
           <div
             key={detail.label}
-            className="flex flex-col gap-1 border-b border-zinc-100 pb-4 sm:flex-row sm:items-center sm:justify-between"
+            className="flex items-center justify-between gap-6 py-4"
           >
-            <span className="text-sm text-zinc-500 sm:text-base">
-              {detail.label}
-            </span>
+            <span className="text-sm text-zinc-500">{detail.label}</span>
 
-            <span className="text-sm font-medium text-zinc-900 sm:text-base">
+            <span className="text-right text-sm font-medium text-zinc-900">
               {detail.value}
             </span>
           </div>
