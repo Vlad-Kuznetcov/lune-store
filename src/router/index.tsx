@@ -10,6 +10,8 @@ import DeliveryPage from "../pages/Delivery";
 import PaymentPage from "../pages/Payment";
 import CartPage from "../pages/Cart";
 import ContactsPage from "../pages/Contacts";
+import CheckoutPage from "../pages/checkout/CheckoutPage";
+import NotFoundPage from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: "contacts",
         element: <ContactsPage />,
+      },
+      {
+        path: "checkout",
+        element: <CheckoutPage />,
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },

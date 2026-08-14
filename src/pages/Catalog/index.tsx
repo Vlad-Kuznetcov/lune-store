@@ -12,6 +12,7 @@ import CategoryFilter from "../../components/catalog/CategoryFilter";
 import ProductGrid from "../../components/catalog/ProductGrid";
 
 import { products } from "../../data/products";
+import SEO from "../../components/SEO";
 
 const CatalogPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,6 +37,10 @@ const CatalogPage = () => {
 
   return (
     <>
+      <SEO
+        title="Каталог срібних прикрас — LUNÉ"
+        description="Перегляньте каталог срібних каблучок, сережок, браслетів та інших прикрас LUNÉ."
+      />
       <CatalogHeader />
 
       <Section className="pt-0">

@@ -39,11 +39,17 @@ const Footer = () => {
           </FooterColumn>
 
           <FooterColumn title="Зв'язок">
-            <SocialLink href="#" icon={<SiInstagram size={18} />}>
+            <SocialLink
+              href="https://instagram.com/lune_silver_ua"
+              icon={<SiInstagram size={18} />}
+            >
               Instagram
             </SocialLink>
 
-            <SocialLink href="#" icon={<SiTelegram size={18} />}>
+            <SocialLink
+              href="https://t.me/lune_manager_ua"
+              icon={<SiTelegram size={18} />}
+            >
               Telegram
             </SocialLink>
 
@@ -115,6 +121,7 @@ function SocialLink({ href, icon, children }: SocialLinkProps) {
   return (
     <a
       href={href}
+      target="_blank"
       className="flex items-center gap-3 py-1 text-sm text-zinc-500 transition-colors duration-300 hover:text-zinc-900 sm:text-base"
     >
       {icon}

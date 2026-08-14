@@ -5,6 +5,7 @@ import { useCart } from "../../components/context/CartContext";
 import Container from "../../components/ui/Container";
 import Section from "../../components/ui/Section";
 import SectionTitle from "../../components/ui/SectionTitle";
+import SEO from "../../components/SEO";
 
 const CartPage = () => {
   const { cart, increaseQuantity, decreaseQuantity, removeFromCart } =
@@ -12,52 +13,37 @@ const CartPage = () => {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const handleTelegramOrder = () => {
-    const items = cart
-      .map(
-        (item) =>
-          `• ${item.name}${item.size ? ` — розмір ${item.size}` : ""} — ${item.price.toLocaleString("uk-UA")} грн × ${item.quantity}`,
-      )
-      .join("\n");
-
-    const message = `Добрий день! Хочу оформити замовлення:
-
-${items}
-
-Разом: ${total.toLocaleString("uk-UA")} грн`;
-
-    const telegramUsername = "lune_manager_ua";
-
-    const url = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
-  };
-
   if (cart.length === 0) {
     return (
-      <Section>
-        <Container>
-          <div className="flex min-h-[50vh] flex-col items-center justify-center py-16 text-center">
-            <ShoppingBag size={40} className="text-zinc-400" />
+      <>
+        <SEO
+          title="Кошик — LUNÉ"
+          description="Ваш кошик у магазині срібних прикрас LUNÉ."
+        />
+        <Section>
+          <Container>
+            <div className="flex min-h-[50vh] flex-col items-center justify-center py-16 text-center">
+              <ShoppingBag size={40} className="text-zinc-400" />
 
-            <h2 className="mt-8 text-2xl font-medium sm:text-3xl">
-              Ваш кошик порожній
-            </h2>
+              <h2 className="mt-8 text-2xl font-medium sm:text-3xl">
+                Ваш кошик порожній
+              </h2>
 
-            <p className="mt-4 max-w-md px-4 leading-7 text-zinc-500">
-              Перейдіть до каталогу, щоб знайти прикраси, які ідеально доповнять
-              ваш образ.
-            </p>
+              <p className="mt-4 max-w-md px-4 leading-7 text-zinc-500">
+                Перейдіть до каталогу, щоб знайти прикраси, які ідеально
+                доповнять ваш образ.
+              </p>
 
-            <Link
-              to="/catalog"
-              className="mt-10 rounded-full bg-zinc-900 px-8 py-4 text-white transition hover:bg-zinc-800 hover:shadow-lg"
-            >
-              До каталогу
-            </Link>
-          </div>
-        </Container>
-      </Section>
+              <Link
+                to="/catalog"
+                className="mt-10 rounded-full bg-zinc-900 px-8 py-4 text-white transition hover:bg-zinc-800 hover:shadow-lg"
+              >
+                До каталогу
+              </Link>
+            </div>
+          </Container>
+        </Section>
+      </>
     );
   }
 
@@ -146,12 +132,12 @@ ${items}
             </span>
           </div>
 
-          <button
-            onClick={handleTelegramOrder}
-            className="mt-6 w-full rounded-full bg-zinc-900 py-4 text-base font-medium text-white transition hover:bg-zinc-800 hover:shadow-lg sm:mt-8 sm:text-lg"
+          <Link
+            to="/checkout"
+            className="mt-6 block w-full rounded-full bg-zinc-900 py-4 text-center text-base font-medium text-white transition hover:bg-zinc-800 hover:shadow-lg sm:mt-8 sm:text-lg"
           >
-            Оформити через Telegram
-          </button>
+            Оформити замовлення
+          </Link>
         </div>
       </Container>
     </Section>
