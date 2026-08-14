@@ -3,9 +3,11 @@ import { FaTelegramPlane } from "react-icons/fa";
 
 const HeaderActions = () => {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-4">
       <a
-        href="#"
+        href="https://instagram.com/lune_silver_ua"
+        target="_blank"
+        rel="noopener noreferrer"
         className="transition hover:text-zinc-500"
         aria-label="Instagram"
       >
@@ -13,7 +15,9 @@ const HeaderActions = () => {
       </a>
 
       <a
-        href="#"
+        href="https://t.me/lune_manager_ua"
+        target="_blank"
+        rel="noopener noreferrer"
         className="transition hover:text-zinc-500"
         aria-label="Telegram"
       >
