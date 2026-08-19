@@ -74,6 +74,7 @@ export const AdminPage = () => {
                 <input
                   type="email"
                   required
+                  autoComplete="username"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded border p-2.5 focus:border-black focus:outline-none"
@@ -85,6 +86,7 @@ export const AdminPage = () => {
                 <input
                   type="password"
                   required
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded border p-2.5 focus:border-black focus:outline-none"
@@ -106,6 +108,26 @@ export const AdminPage = () => {
 
   // ЯКЩО АВТОРИЗОВАНИЙ — ПОКАЗУЄМО АДМІНКУ
   return <AdminContent onLogout={handleLogout} />;
+};
+
+// Функція генерації артикулів за вашими правилами
+const generateArticle = (category: string) => {
+  // Словник префіксів для кожної категорії
+  const prefixes: Record<string, string> = {
+    rings: "AR",
+    earrings: "ER",
+    bracelets: "BR",
+    chains: "CH",
+    pendants: "PE",
+  };
+
+  // Беремо потрібний префікс або за замовчуванням 'LU' (Lune)
+  const prefix = prefixes[category] || "LU";
+
+  // Генеруємо випадкове 4-значне число від 1000 до 9999
+  const randomNumber = Math.floor(1000 + Math.random() * 9000);
+
+  return `${prefix}-${randomNumber}`;
 };
 
 // Окремий компонент адмінки з формою товару
@@ -148,6 +170,9 @@ const AdminContent = ({ onLogout }: { onLogout: () => void }) => {
       const imageUrl = await uploadImage(imageFile);
       if (!imageUrl) throw new Error("Помилка завантаження фото");
 
+      // Якщо артикул не вказано вручну — генеруємо автоматично
+      const finalArticle = article.trim() || generateArticle(category);
+
       const parsedSizes = sizes ? sizes.split(",").map((s) => s.trim()) : [];
       const details = [
         { label: "Матеріал", value: material },
@@ -158,7 +183,7 @@ const AdminContent = ({ onLogout }: { onLogout: () => void }) => {
       const { error } = await supabase.from("products").insert([
         {
           name,
-          article,
+          article: finalArticle,
           category,
           price: Number(price),
           image: imageUrl,
@@ -220,13 +245,16 @@ const AdminContent = ({ onLogout }: { onLogout: () => void }) => {
               </div>
               <div>
                 <label className="mb-1 block text-sm font-medium">
-                  Артикул
+                  Артикул{" "}
+                  <span className="text-xs text-zinc-400">
+                    (авто, якщо порожньо)
+                  </span>
                 </label>
                 <input
-                  required
                   type="text"
                   value={article}
                   onChange={(e) => setArticle(e.target.value)}
+                  placeholder="Автоматично"
                   className="w-full rounded border p-2"
                 />
               </div>
@@ -243,6 +271,7 @@ const AdminContent = ({ onLogout }: { onLogout: () => void }) => {
                   <option value="earrings">Сережки (earrings)</option>
                   <option value="bracelets">Браслети (bracelets)</option>
                   <option value="chains">Ланцюжки (chains)</option>
+                  <option value="pendants">Підвіски (pendants)</option>
                 </select>
               </div>
               <div>
