@@ -11,10 +11,10 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 left-0 isolate z-50 w-full transform-gpu border-b border-zinc-200 bg-white/95 backdrop-blur-md">
       <Container>
         {/* Mobile */}
-        <div className="grid h-20 grid-cols-3 items-center md:hidden">
+        <div className="grid h-16 grid-cols-3 items-center md:hidden">
           <div className="justify-self-start">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -47,12 +47,13 @@ const Header = () => {
         </div>
       </Container>
 
+      {/* Выпадающее меню для мобильных */}
       <div
         className={`grid transition-[grid-template-rows] duration-300 ease-out md:hidden ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
-        <div className="overflow-hidden">
+        <div className="overflow-hidden bg-white">
           <div className="border-t border-zinc-200 bg-white">
             <Container>
               <div

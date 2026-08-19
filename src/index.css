@@ -2,6 +2,13 @@
 
 @import "tailwindcss";
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  /* Фікс для гуляючих адресних стрічок на iOS */
+}
+
 body {
   font-family: "Inter", sans-serif;
   background-color: #fcfaf7;
