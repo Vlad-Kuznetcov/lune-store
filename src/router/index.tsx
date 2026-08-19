@@ -12,6 +12,7 @@ import CartPage from "../pages/Cart";
 import ContactsPage from "../pages/Contacts";
 import CheckoutPage from "../pages/checkout/CheckoutPage";
 import NotFoundPage from "../pages/NotFound";
+import AdminPage from "../pages/AdminPage/AdminPage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <CheckoutPage />,
+      },
+      {
+        path: "/manage-lune",
+        element: <AdminPage />,
       },
       {
         path: "*",
