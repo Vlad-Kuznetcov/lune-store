@@ -30,8 +30,13 @@ const FeaturedProductsSection = () => {
     );
   }
 
-  // Беремо перші 4 товари для секції «Популярні» (або додайте потрібну фільтрацію)
-  const featuredProducts = products.slice(0, 4);
+  const featuredProducts = products
+    .filter((product) => product.isPopular)
+    .slice(0, 4);
+
+  if (featuredProducts.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-16 sm:py-20 lg:py-24">

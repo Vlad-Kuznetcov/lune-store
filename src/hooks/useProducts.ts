@@ -7,27 +7,33 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchProducts = async () => {
+    setLoading(true);
+    setError(null);
+
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      setError("Не вдалося завантажити товари");
+      setProducts([]);
+    } else {
+      const mappedProducts: Product[] = (data ?? []).map((product) => ({
+        ...product,
+        isNew: product.is_new ?? false,
+        isPopular: product.is_popular ?? false,
+      }));
+
+      setProducts(mappedProducts);
+    }
+
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      setError(null);
-
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        console.error("Supabase products error:", error);
-        setProducts([]);
-        setError("Не вдалося завантажити товари");
-      } else {
-        setProducts((data ?? []) as Product[]);
-      }
-
-      setLoading(false);
-    };
-
     fetchProducts();
   }, []);
 
@@ -35,5 +41,6 @@ export const useProducts = () => {
     products,
     loading,
     error,
+    refetch: fetchProducts,
   };
 };
